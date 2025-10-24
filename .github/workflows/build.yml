@@ -97,7 +97,7 @@ jobs:
       - name: Checkout lime-feed
         uses: actions/checkout@v4
         with:
-          repository: libremesh/lime-feed
+          repository: a-gave/lime-feed
           path: lime-feed
 
       - uses: actions/download-artifact@v4
@@ -116,6 +116,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          external_repository: libremesh/lime-feed
+          external_repository: a-gave/lime-feed
           publish_dir: ./lime-feed/profiles/
           destination_dir: profiles
