@@ -56,7 +56,11 @@ jobs:
     needs: generate_matrix
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.generate_matrix.outputs.matrix_builds) }}
+      # matrix: ${{ fromJson(needs.generate_matrix.outputs.matrix_builds) }}
+      matrix:
+        include:
+          - { version: openwrt-24.10, arch: x86_64, openwrt_branch_path: 'openwrt-24.10'}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -97,7 +101,7 @@ jobs:
       - name: Checkout lime-feed
         uses: actions/checkout@v4
         with:
-          repository: libremesh/lime-feed
+          repository: a-gave/lime-feed
           path: lime-feed
 
       - uses: actions/download-artifact@v4
@@ -116,6 +120,6 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          external_repository: libremesh/lime-feed
+          external_repository: a-gave/lime-feed
           publish_dir: ./lime-feed/profiles/
           destination_dir: profiles
